@@ -5,7 +5,7 @@
 
 window#waybar { 
     color: #c0caf5;
-	background-color: transparent; 
+    	background-color: transparent;
     font-family: 
         SpaceMono Nerd Font,
         feather;
@@ -15,8 +15,8 @@ window#waybar {
 .modules-left,
 .modules-right
 {
-    background: rgba(0, 0, 8, .7);
-    margin: 5px 10px;
+    background: rgba(0, 0, 8, 1);
+    margin: 5px 5px;
     padding: 0 5px;
     border-radius: 5px;
 }
@@ -65,12 +65,11 @@ window#waybar {
 #power-profiles-daemon:hover,
 #language:hover,
 #mpd:hover {
-    background: rgba(26, 27, 38, 0.9);
+    background: rgba(26, 27, 38, 1);
 }
 
 
 #workspaces button {
-  background: transparent;
   font-family:
     SpaceMono Nerd Font,
     feather;
