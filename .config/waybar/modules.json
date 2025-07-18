@@ -2,6 +2,8 @@
 {
     "custom/arch": {
         "format":"󰣇",
+	"return-type": "json",
+	"on-click": "~/.config/waybar/script/updates.sh --update",
         "tooltip": false
     },
 
