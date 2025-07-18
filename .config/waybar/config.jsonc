@@ -11,13 +11,14 @@
         "hyprland/workspaces"
     ],
     "modules-right": [
+	"custom/hyprsunset",    
         "pulseaudio",
         "cpu",
         "memory",
         "temperature",
         "battery",
         "tray",
-        "clock",
+	"clock",
         "custom/power"
     ],
 

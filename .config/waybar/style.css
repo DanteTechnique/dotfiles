@@ -80,15 +80,16 @@ window#waybar {
   border-radius: 15px;
 }
 
+
 #workspaces button.active {
     background: #13131d; 
 }
-
 #workspaces button:hover {
   background: #11111b;
   color: #cdd6f4;
   box-shadow: none;
 }
+
 
 #custom-arch {
     margin-left: 5px;
@@ -96,18 +97,28 @@ window#waybar {
     font-size: 20px;
     transition: color .5s;
 }
-
 #custom-arch:hover {
     color: #1793d1;
 }
 
+
 #custom-power {
     font-size:20px;
 }
-
 #custom-power:hover {
     color: #1793d1;
 }
+
+
+#custom-hyprsunset {
+    padding: 0 10px;
+    border-radius: 5px;
+}
+#custom-hyprsunset:hover {
+    color: #1793d1
+}
+
+
 #custom-notification {
   font-family: "NotoSansMono Nerd Font";
 }
