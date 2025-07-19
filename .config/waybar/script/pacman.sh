@@ -1,13 +1,9 @@
 #!/bin/bash
 
-# Скрипт для обновления Arch Linux
-
-# Функция для вывода сообщений с цветом
 print_message() {
   echo -e "\e[1;32m$1\e[0m"
 }
 
-# Функция для обработки ошибок
 handle_error() {
   echo -e "\e[1;31mError: $1\e[0m" >&2
   exit 1
@@ -43,7 +39,6 @@ handle_error() {
   print_message "█▄▄▄█   █▄▄▄▄▄▄▄█▄█ █▄▄█ █▄▄▄█ █▄▄▄█   █▄█ █▄▄█▄▄▄█ █▄█"
   flatpak update
 
-# Проверка orphaned пакетов (не нужных зависимостей)
 #print_message "orphaned check..."
 #orphaned=$(pacman -Qdtq)
 #if [ -n "$orphaned" ]; then
@@ -58,7 +53,6 @@ handle_error() {
 #  print_message "Orphaned пакеты не найдены."
 #fi
 
-# Обновление mandb (базы данных man страниц)
 #print_message "Обновление базы данных man страниц..."
 #mandb --quiet || echo -e "\e[1;33mПредупреждение: Не удалось обновить базу данных man страниц\e[0m"
 
