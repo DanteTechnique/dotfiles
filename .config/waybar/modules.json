@@ -80,12 +80,16 @@
     },
 
 
+   
     "custom/hyprsunset": {
         "format": "{}",
-        "exec": "echo ",
+        "exec": "~/.config/waybar/script/hyprsunset.sh --update",
+        "exec-if": "command -v hyprsunset",
         "on-click": "~/.config/waybar/script/hyprsunset.sh",
-	"tooltip": false
+        "return-type": "json",
+        "signal": 1
     },
+ 
 
 
     "custom/power": {
