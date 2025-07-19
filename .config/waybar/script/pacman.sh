@@ -1,9 +1,8 @@
 #!/bin/bash
 
-case $1 in
-  --update)
-    alacritty -e bash -c "
- # Функция для вывода сообщений с цветом
+# Скрипт для обновления Arch Linux
+
+# Функция для вывода сообщений с цветом
 print_message() {
   echo -e "\e[1;32m$1\e[0m"
 }
@@ -25,10 +24,10 @@ handle_error() {
   sudo pacman -Syu --noconfirm || handle_error "Не удалось обновить пакеты"
 
 # AUR
-  print_message " ▄▄▄▄▄▄▄ ▄▄   ▄▄ ▄▄▄▄▄▄ "
-  print_message "█       █  █ █  █   ▄  █"
-  print_message "█   ▄   █  █ █  █  █ █ █"
-  print_message "█  █▄█  █  █▄█  █   █▄▄█▄"
+  print_message " ▄▄▄▄▄▄▄ ▄▄   ▄▄ ▄▄▄▄▄▄ "  
+  print_message "█       █  █ █  █   ▄  █"  
+  print_message "█   ▄   █  █ █  █  █ █ █"  
+  print_message "█  █▄█  █  █▄█  █   █▄▄█▄" 
   print_message "█       █       █    ▄▄  █"
   print_message "█   ▄   █       █   █  █ █"
   print_message "█▄▄█ █▄▄█▄▄▄▄▄▄▄█▄▄▄█  █▄█"
@@ -42,5 +41,26 @@ handle_error() {
   print_message "█    ▄▄▄█   █▄▄▄█      █ █   █ █    ▄▄▄█      █     █▄ "
   print_message "█   █   █       █  ▄   █ █   █ █   █   █  ▄   █    ▄  █"
   print_message "█▄▄▄█   █▄▄▄▄▄▄▄█▄█ █▄▄█ █▄▄▄█ █▄▄▄█   █▄█ █▄▄█▄▄▄█ █▄█"
-  flatpak update"
-esac
+  flatpak update
+
+# Проверка orphaned пакетов (не нужных зависимостей)
+#print_message "orphaned check..."
+#orphaned=$(pacman -Qdtq)
+#if [ -n "$orphaned" ]; then
+#  print_message "Найдены orphaned пакеты:"
+#  echo "$orphaned"
+#  read -p "Удалить эти пакеты? (y/N): " -n 1 -r
+#  echo
+#  if [[ $REPLY =~ ^[Yy]$ ]]; then
+#    pacman -Rns --noconfirm $(pacman -Qdtq) || echo -e "\e[1;33mПредупреждение: Не удалось удалить некоторые orphaned пакеты\e[0m"
+#  fi
+#else
+#  print_message "Orphaned пакеты не найдены."
+#fi
+
+# Обновление mandb (базы данных man страниц)
+#print_message "Обновление базы данных man страниц..."
+#mandb --quiet || echo -e "\e[1;33mПредупреждение: Не удалось обновить базу данных man страниц\e[0m"
+
+print_message "Done..."
+read
