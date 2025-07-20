@@ -1,14 +1,12 @@
 // Modules configuration
 {
     "custom/arch": {
-//        "format":"󰣇 {}",
         "exec": "~/.config/waybar/script/check-updates.sh",
         "return-type": "json",
 	 "format":"󰣇 {}",
-//        "format": " {}",
         "tooltip": true,
         "on-click": "~/.config/waybar/script/check-updates.sh --update",
-        "interval": 3600
+        "interval": 1800
     },
 
 
