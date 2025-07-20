@@ -17,7 +17,7 @@ handle_error() {
   print_message "█    ▄▄▄█       █    █  █       █       █  ▄    █"
   print_message "█   █   █   ▄   █    █▄▄█ ██▄██ █   ▄   █ █ █   █"
   print_message "█▄▄▄█   █▄▄█ █▄▄█▄▄▄▄▄▄▄█▄█   █▄█▄▄█ █▄▄█▄█  █▄▄█"
-  sudo pacman -Syu --noconfirm || handle_error "Не удалось обновить пакеты"
+  sudo pacman -Syu || handle_error "Can't update packages"
 
 # AUR
   print_message " ▄▄▄▄▄▄▄ ▄▄   ▄▄ ▄▄▄▄▄▄ "  
@@ -27,7 +27,7 @@ handle_error() {
   print_message "█       █       █    ▄▄  █"
   print_message "█   ▄   █       █   █  █ █"
   print_message "█▄▄█ █▄▄█▄▄▄▄▄▄▄█▄▄▄█  █▄█"
-  yay -Syu --noconfirm || echo -e "\e[1;33mПредупреждение: Не удалось обновить AUR пакеты\e[0m"
+  yay -Syu || echo -e "\e[1;33mПредупреждение: Не удалось обновить AUR пакеты\e[0m"
 
 # Flatpak
   print_message " ▄▄▄▄▄▄▄ ▄▄▄     ▄▄▄▄▄▄ ▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄ ▄▄▄▄▄▄ ▄▄▄   ▄ "
@@ -37,24 +37,8 @@ handle_error() {
   print_message "█    ▄▄▄█   █▄▄▄█      █ █   █ █    ▄▄▄█      █     █▄ "
   print_message "█   █   █       █  ▄   █ █   █ █   █   █  ▄   █    ▄  █"
   print_message "█▄▄▄█   █▄▄▄▄▄▄▄█▄█ █▄▄█ █▄▄▄█ █▄▄▄█   █▄█ █▄▄█▄▄▄█ █▄█"
-  flatpak update
+  flatpak update || handle_error "Can't update packages"
 
-#print_message "orphaned check..."
-#orphaned=$(pacman -Qdtq)
-#if [ -n "$orphaned" ]; then
-#  print_message "Найдены orphaned пакеты:"
-#  echo "$orphaned"
-#  read -p "Удалить эти пакеты? (y/N): " -n 1 -r
-#  echo
-#  if [[ $REPLY =~ ^[Yy]$ ]]; then
-#    pacman -Rns --noconfirm $(pacman -Qdtq) || echo -e "\e[1;33mПредупреждение: Не удалось удалить некоторые orphaned пакеты\e[0m"
-#  fi
-#else
-#  print_message "Orphaned пакеты не найдены."
-#fi
-
-#print_message "Обновление базы данных man страниц..."
-#mandb --quiet || echo -e "\e[1;33mПредупреждение: Не удалось обновить базу данных man страниц\e[0m"
 
 print_message "Done..."
 read
