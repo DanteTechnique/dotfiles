@@ -91,6 +91,7 @@
         "exec-if": "command -v hyprsunset",
         "on-click": "~/.config/waybar/script/hyprsunset.sh",
         "return-type": "json",
+	"tooltip": false,
         "signal": 1
     },
  
