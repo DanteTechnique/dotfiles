@@ -1,50 +1,85 @@
-/* The name of the window itself */
+/* Основное окно приложения - непрозрачное */
 #window {
-  background-color: rgba(24, 24, 24, 0.8);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
-  border-radius: 1rem;
+  background-color: #1a1a1a;          /* Полностью непрозрачный тёмно-серый */
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 
+              0 4px 6px -4px rgba(0, 0, 0, 0.25); /* Усиленная тень */
   font-size: 1.2rem;
-  /* The name of the box that contains everything */
+  overflow: hidden;                   /* Обрезает выходящие за границы элементы */
+  border: 1px solid #333;             /* Тонкая граница для акцента */
+  border-radius: 0;                   /* Убраны скругления углов */
 }
-#window #outer-box {
-  /* The name of the search bar */
-  /* The name of the scrolled window containing all of the entries */
+
+/* Контейнер для всех внутренних элементов */
+#outer-box {
+  /* Содержит input, scroll и inner-box */
 }
-#window #outer-box #input {
-  background-color: rgba(24, 24, 24, 0.6);
+
+/* Поле ввода поиска - непрозрачное */
+#input {
+  background-color: #1a1a1a;          /* Непрозрачный фон */
   color: #f2f2f2;
   border: none;
-  border-bottom: 1px solid rgba(24, 24, 24, 0.2);
+  border-bottom: 1px solid #333;      /* Более контрастная граница */
   padding: 0.8rem 1rem;
   font-size: 1.5rem;
-  border-radius: 1rem 1rem 0 0;
+  border-radius: 0;                   /* Убраны скругления верхних углов */
 }
-#window #outer-box #input:focus, #window #outer-box #input:focus-visible, #window #outer-box #input:active {
+
+#input:focus, 
+#input:focus-visible, 
+#input:active {
   border: none;
   outline: 2px solid transparent;
   outline-offset: 2px;
+  border-bottom: 1px solid #555;      /* Акцент при фокусе */
 }
-#window #outer-box #scroll {
-  /* The name of the box containing all of the entries */
+
+/* Контейнер с прокруткой для списка */
+#scroll {
+  /* Содержит inner-box с записями */
 }
-#window #outer-box #scroll #inner-box {
-  /* The name of all entries */
-  /* The name of all boxes shown when expanding  */
-  /* entries with multiple actions */
+
+/* Внутренний контейнер списка */
+#inner-box {
+  overflow: hidden;                   /* Фиксирует границы дочерних элементов */
+  background-color: #1f1f1f;          /* Легкий контраст с основным фоном */
+  border-radius: 0;                   /* Убраны скругления нижних углов */
 }
-#window #outer-box #scroll #inner-box #entry {
-  color: #fff;
-  background-color: rgba(24, 24, 24, 0.1);
+
+/* Отдельная запись в списке */
+#entry {
+  color: #e0e0e0;                     /* Слегка приглушенный белый */
+  background-color: #1f1f1f;           /* Непрозрачный фон */
   padding: 0.6rem 1rem;
-  /* The name of all images in entries displayed in image mode */
-  /* The name of all the text in entries */
+  border-bottom: 1px solid #252525;   /* Разделитель между элементами */
+  border-radius: 0;                   /* Убраны скругления элементов */
 }
-#window #outer-box #scroll #inner-box #entry #img {
-  width: 1rem;
-  margin-right: 0.5rem;
-}
-#window #outer-box #scroll #inner-box #entry:selected {
-  color: #fff;
-  background-color: rgba(255, 255, 255, 0.1);
+
+/* Выделенная запись в списке */
+#entry:selected {
+  color: #ffffff;                     /* Яркий белый для выделения */
+  background-color: #2a2a2a;           /* Светлее фона для контраста */
   outline: none;
+}
+
+/* Первая запись в списке */
+#entry:first-child {
+  border-top: none;                   /* Убираем верхнюю границу */
+}
+
+/* Последняя запись в списке */
+#entry:last-child {
+  border-bottom: none;                /* Убираем нижнюю границу */
+}
+
+/* Единственная запись в списке */
+#entry:first-child:last-child {
+  border: none;                       /* Убираем все границы */
+}
+
+/* Изображения в записях (иконки) */
+#entry #img {
+  width: 1.1rem;                      /* Слегка увеличим иконки */
+  margin-right: 0.6rem;               /* Больший отступ */
+  opacity: 0.9;                       /* Легкое приглушение */
 }
