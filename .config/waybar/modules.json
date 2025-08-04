@@ -6,7 +6,7 @@
 	 "format":"󰣇 {}",
         "tooltip": true,
         "on-click": "~/.config/waybar/script/check-updates.sh --update",
-        "interval": 600
+        "interval": 3600
     },
 
 
