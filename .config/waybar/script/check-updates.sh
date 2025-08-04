@@ -13,7 +13,7 @@ check_update () {
 
     if command -v yay &>/dev/null; then
         aur_updates=$(yay -Qu 2>/dev/null | wc -l)
-        aur_updates=$((aur_updates - pacman_updates + 0))
+	aur_updates=$((aur_updates + 0))
     fi
 
     if command -v flatpak &>/dev/null; then
