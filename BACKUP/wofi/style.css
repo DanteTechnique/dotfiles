@@ -1,0 +1,85 @@
+/* Основное окно приложения - непрозрачное */
+#window {
+  background-color: #1a1a1a;          /* Полностью непрозрачный тёмно-серый */
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 
+              0 4px 6px -4px rgba(0, 0, 0, 0.25); /* Усиленная тень */
+  font-size: 1.2rem;
+  overflow: hidden;                   /* Обрезает выходящие за границы элементы */
+  border: 1px solid #333;             /* Тонкая граница для акцента */
+  border-radius: 0;                   /* Убраны скругления углов */
+}
+
+/* Контейнер для всех внутренних элементов */
+#outer-box {
+  /* Содержит input, scroll и inner-box */
+}
+
+/* Поле ввода поиска - непрозрачное */
+#input {
+  background-color: #1a1a1a;          /* Непрозрачный фон */
+  color: #f2f2f2;
+  border: none;
+  border-bottom: 1px solid #333;      /* Более контрастная граница */
+  padding: 0.8rem 1rem;
+  font-size: 1.5rem;
+  border-radius: 0;                   /* Убраны скругления верхних углов */
+}
+
+#input:focus, 
+#input:focus-visible, 
+#input:active {
+  border: none;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  border-bottom: 1px solid #555;      /* Акцент при фокусе */
+}
+
+/* Контейнер с прокруткой для списка */
+#scroll {
+  /* Содержит inner-box с записями */
+}
+
+/* Внутренний контейнер списка */
+#inner-box {
+  overflow: hidden;                   /* Фиксирует границы дочерних элементов */
+  background-color: #1f1f1f;          /* Легкий контраст с основным фоном */
+  border-radius: 0;                   /* Убраны скругления нижних углов */
+}
+
+/* Отдельная запись в списке */
+#entry {
+  color: #e0e0e0;                     /* Слегка приглушенный белый */
+  background-color: #1f1f1f;           /* Непрозрачный фон */
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid #252525;   /* Разделитель между элементами */
+  border-radius: 0;                   /* Убраны скругления элементов */
+}
+
+/* Выделенная запись в списке */
+#entry:selected {
+  color: #ffffff;                     /* Яркий белый для выделения */
+  background-color: #2a2a2a;           /* Светлее фона для контраста */
+  outline: none;
+}
+
+/* Первая запись в списке */
+#entry:first-child {
+  border-top: none;                   /* Убираем верхнюю границу */
+}
+
+/* Последняя запись в списке */
+#entry:last-child {
+  border-bottom: none;                /* Убираем нижнюю границу */
+}
+
+/* Единственная запись в списке */
+#entry:first-child:last-child {
+  border: none;                       /* Убираем все границы */
+}
+
+/* Изображения в записях (иконки) */
+#entry #img {
+  width: 1.1rem;                      /* Слегка увеличим иконки */
+  margin-right: 0.6rem;               /* Больший отступ */
+  opacity: 0.9;                       /* Легкое приглушение */
+}
