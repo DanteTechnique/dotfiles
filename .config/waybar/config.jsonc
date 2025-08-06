@@ -10,6 +10,7 @@
         "hyprland/workspaces"
     ],
     "modules-right": [
+	"idle_inhibitor",
 	"custom/hyprsunset",    
         "pulseaudio",
         "cpu",

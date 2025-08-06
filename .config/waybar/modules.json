@@ -99,5 +99,16 @@
         "format" : " ⏻ ",
 	"on-click": "wlogout --protocol layer-shell",
 	"tooltip": false
+    },
+
+
+
+    "idle_inhibitor": {
+    	"format": "{icon}",
+	"tooltip": false,
+    	"format-icons": {
+        	"activated": "",
+        	"deactivated": ""
+    	}
     }
 }
