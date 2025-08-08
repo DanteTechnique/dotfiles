@@ -27,7 +27,7 @@ handle_error() {
   print_message "█       █       █    ▄▄  █"
   print_message "█   ▄   █       █   █  █ █"
   print_message "█▄▄█ █▄▄█▄▄▄▄▄▄▄█▄▄▄█  █▄█"
-  yay -Syu || echo -e "\e[1;33mПредупреждение: Не удалось обновить AUR пакеты\e[0m"
+  yay -Syu || handle_error "Can't update AUR packages"
 
 # Flatpak
   print_message " ▄▄▄▄▄▄▄ ▄▄▄     ▄▄▄▄▄▄ ▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄ ▄▄▄▄▄▄ ▄▄▄   ▄ "
@@ -37,7 +37,7 @@ handle_error() {
   print_message "█    ▄▄▄█   █▄▄▄█      █ █   █ █    ▄▄▄█      █     █▄ "
   print_message "█   █   █       █  ▄   █ █   █ █   █   █  ▄   █    ▄  █"
   print_message "█▄▄▄█   █▄▄▄▄▄▄▄█▄█ █▄▄█ █▄▄▄█ █▄▄▄█   █▄█ █▄▄█▄▄▄█ █▄█"
-  flatpak update || handle_error "Can't update packages"
+  flatpak update || handle_error "Can't update Flatpak packages"
 
 
 print_message "Done..."

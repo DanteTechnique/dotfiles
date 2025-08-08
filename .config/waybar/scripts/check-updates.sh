@@ -32,7 +32,7 @@ check_update () {
 }
 
 update_system() {
-    alacritty --class floating -e bash -c "~/.config/waybar/script/pacman.sh"
+    alacritty --class floating -e bash -c "~/.config/waybar/scripts/pacman.sh"
 }
 
 case "$1" in
