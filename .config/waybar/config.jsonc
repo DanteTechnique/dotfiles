@@ -17,6 +17,7 @@
         "memory",
         "temperature",
         "battery",
+//	"custom/nm-applet",
         "tray",
 	"clock",
         "custom/power"
