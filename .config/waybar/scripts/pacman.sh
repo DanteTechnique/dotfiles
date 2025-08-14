@@ -6,7 +6,6 @@ print_message() {
 
 handle_error() {
   echo -e "\e[1;31mError: $1\e[0m" >&2
-  exit 1
 }
 
 print_message " ▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄ ▄▄   ▄▄ ▄▄▄▄▄▄▄ ▄▄    ▄ "
