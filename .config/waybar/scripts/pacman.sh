@@ -1,11 +1,15 @@
 #!/bin/bash
 
 print_message() {
-  echo -e "\e[1;32m$1\e[0m"
+  txtgreen='\e[1;32m'
+  txtwhite='\e[0m'
+  echo -e "${txtgreen}$1${txtwhite}"
 }
 
 handle_error() {
-  echo -e "\e[1;31mError: $1\e[0m" >&2
+  txtred='\e[1;31m'
+  txtwhite='\e[0m'
+  echo -e "${txtred}Error: $1${txtwhite}" >&2
 }
 
 print_message " ▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄ ▄▄   ▄▄ ▄▄▄▄▄▄▄ ▄▄    ▄ "
