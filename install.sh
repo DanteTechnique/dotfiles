@@ -1,11 +1,39 @@
 #!/usr/bin/env bash
 
 print_message() {
-  txtgreen='\e[0;32m'
-  txtreset='\e[0m'
+  txtgreen="\e[$(tput setaf 2)"
+  txtreset="\e[$(tput sgr0)"
   echo
   echo -e "${txtgreen}$1${txtreset}"
 }
+
+ascii() {
+  txtblack="\e[$(tput setaf 0)"
+  txtbold="\e[$(tput bold)"
+  bgrwhite="\e[$(tput setab 7)"
+  txtreset="\e[$(tput sgr0)"
+  echo -e "${bgrwhite}${txtblack}${txtbold}$1${txtreset}"
+}
+
+ascii "___  ________   ________  _________  ________  ___       ___           ________  ___  ___       "
+ascii "|\  \|\   ___  \|\   ____\|\___   ___\\   __  \|\  \     |\  \         |\   ____\|\  \|\  \      "
+ascii "\ \  \ \  \\ \  \ \  \___|\|___ \  \_\ \  \|\  \ \  \    \ \  \        \ \  \___|\ \  \\\  \       "
+ascii " \ \  \ \  \\ \  \ \_____  \   \ \  \ \ \   __  \ \  \    \ \  \        \ \_____  \ \   __  \    "
+ascii "  \ \  \ \  \\ \  \|____|\  \   \ \  \ \ \  \ \  \ \  \____\ \  \____  __\|____|\  \ \  \ \  \   "
+ascii "   \ \__\ \__\\ \__\____\_\  \   \ \__\ \ \__\ \__\ \_______\ \_______\\__\____\_\  \ \__\ \__\   "
+ascii "    \|__|\|__| \|__|\_________\   \|__|  \|__|\|__|\|_______|\|_______\|__|\_________\|__|\|__| "
+ascii "                   \|_________|                                           \|_________|          "
+
+#ascii "_________ _        _______ _________ _______  _        _           _______          "
+#ascii "\__   __/( (    /|(  ____ \\__   __/(  ___  )( \      ( \         (  ____ \|\     /|"
+#ascii "   ) (   |  \  ( || (    \/   ) (   | (   ) || (      | (         | (    \/| )   ( |"
+#ascii "   | |   |   \ | || (_____    | |   | (___) || |      | |         | (_____ | (___) |"
+#ascii "   | |   | (\ \) |(_____  )   | |   |  ___  || |      | |         (_____  )|  ___  |"
+#ascii "   | |   | | \   |      ) |   | |   | (   ) || |      | |               ) || (   ) |"
+#ascii "___) (___| )  \  |/\____) |   | |   | )   ( || (____/\| (____/\ _ /\____) || )   ( |"
+#ascii "\_______/|/    )_)\_______)   )_(   |/     \|(_______/(_______/(_)\_______)|/     \|"
+
+echo
 
 # installing packages
 
@@ -31,7 +59,8 @@ sudo pacman -S hyprland \
   blueman \
   tmux \
   pavucontrol \
-  awesome-terminal-fonts
+  awesome-terminal-fonts \
+  brightnessctl
 
 # installing AUR helper
 
