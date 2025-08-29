@@ -54,7 +54,7 @@ yay -S pacseek \
 
 print_message "configuring shell..."
 
-chsh -s /usr/bin/fish $(whoam)
+chsh -s /usr/bin/fish $(whoami)
 curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
 omf install boxfish
 
