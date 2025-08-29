@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 print_message() {
   txtgreen='\e[1;32m'

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 check_update() {
   local pacman_updates=0 aur_updates=0 flatpak_updates=0
