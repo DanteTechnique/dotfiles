@@ -35,8 +35,38 @@ ascii "                   \|_________|                                          
 
 echo
 
-# installing packages
+#backuping previous configuration
+print_message "backup your current dotfiles? [y/n]"
 
+read -p ">" answer
+
+while true; do
+  read -e answer
+
+  answer=$(echo "$answer" | tr '[:upper:]' '[:lower:]')
+
+  case $answer in
+  "y" | "yes")
+    echo -e "backuping your previous dotfiles..."
+    cp $HOME/.config/ $HOME/.backup_dotfiles/ -r
+    break
+    ;;
+  "n" | "no")
+    echo -e "skipping..."
+    break
+    ;;
+  *)
+    echo -e "wrong input, please try again"
+    ;;
+  esac
+done
+
+#installing dotfiles
+#print_message "installing dotfiles..."
+
+#cp ./.config/ $HOME/.config/ -r
+
+# installing packages
 print_message "installing packages..."
 
 sudo pacman -Syu
@@ -63,7 +93,6 @@ sudo pacman -S hyprland \
   brightnessctl
 
 # installing AUR helper
-
 print_message "installing yay..."
 
 cd /tmp
@@ -72,7 +101,6 @@ cd yay/
 makepkg -si
 
 # installing AUR packages
-
 print_message "installing AUR packages..."
 
 yay -S pacseek \
@@ -80,7 +108,6 @@ yay -S pacseek \
   waterfox-bin
 
 # changing shell and installing oh-my-fish
-
 print_message "configuring shell..."
 
 chsh -s /usr/bin/fish $(whoami)
