@@ -38,10 +38,8 @@ echo
 #backuping previous configuration
 print_message "backup your current dotfiles? [y/n]"
 
-read -p ">" answer
-
 while true; do
-  read -e answer
+  read -r -p ">" answer
 
   answer=$(echo "$answer" | tr '[:upper:]' '[:lower:]')
 
@@ -62,9 +60,23 @@ while true; do
 done
 
 #installing dotfiles
-#print_message "installing dotfiles..."
-
-#cp ./.config/ $HOME/.config/ -r
+print_message "installing dotfiles..."
+cp .config/alacritty $HOME/.config/ -r
+cp .config/dunst $HOME/.config/ -r
+cp .config/fastfetch $HOME/.config/ -r
+cp .config/gtk-3.0 $HOME/.config/ -r
+cp .config/gtk-4.0 $HOME/.config/ -r
+cp .config/hypr $HOME/.config/ -r
+cp .config/Kvantum $HOME/.config/ -r
+cp .config/nwg-look $HOME/.config/ -r
+cp .config/qt5ct $HOME/.config/ -r
+cp .config/qt6ct $HOME/.config/ -r
+cp .config/waybar $HOME/.config/ -r
+cp .config/wlogout $HOME/.config/ -r
+cp .config/wofi $HOME/.config/ -r
+cp .config/xsettingsd $HOME/.config -r
+cp .icons $HOME/ -r
+cp .vimrc $HOME/
 
 # installing packages
 print_message "installing packages..."
@@ -73,6 +85,7 @@ sudo pacman -Syu
 
 sudo pacman -S hyprland \
   hyprlock \
+  hyprpaper \
   hypridle \
   hyprsunset \
   waybar \
@@ -90,7 +103,17 @@ sudo pacman -S hyprland \
   tmux \
   pavucontrol \
   awesome-terminal-fonts \
-  brightnessctl
+  brightnessctl \
+  lxappearance \
+  qt5ct \
+  qt6ct \
+  kvantum \
+  breeze \
+  breeze-gtk \
+  nwg-look \
+  otf-font-awesome \
+  ttf-arimo-nerd \
+  noto-fonts
 
 # installing AUR helper
 print_message "installing yay..."
@@ -108,10 +131,10 @@ yay -S pacseek \
   waterfox-bin
 
 # changing shell and installing oh-my-fish
-print_message "configuring shell..."
+#print_message "configuring shell..."
 
-chsh -s /usr/bin/fish $(whoami)
-curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
-omf install boxfish
+#chsh -s /usr/bin/fish $(whoami)
+#curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
+#omf install boxfish
 
-read
+read -p "Done..."
