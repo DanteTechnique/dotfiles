@@ -239,4 +239,27 @@ git clone https://github.com/oh-my-fish/oh-my-fish
 cd oh-my-fish
 bin/install --offline
 
-read -p "Done..."
+print_message "Done..."
+
+while true; do
+  read -r -p "to work properly reboot your pc, do it now? [y/n] " answer2
+
+  answer2=$(echo "$answer2" | tr '[:upper:]' '[:lower:]')
+
+  case $reboot in
+  "y" | "yes")
+    echo -e "rebooting..."
+    sudo systemctl reboot
+    break
+    ;;
+  "n" | "no")
+    echo
+    break
+    ;;
+  *)
+    echo -e "wrong input, please try again"
+    ;;
+  esac
+done
+
+read -p "installation done..."
