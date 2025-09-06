@@ -40,4 +40,4 @@ print_message "█▄▄▄█   █▄▄▄▄▄▄▄█▄█ █▄▄█ 
 flatpak update || handle_error "Can't update Flatpak packages"
 
 print_message "Done..."
-read
+sleep 5
