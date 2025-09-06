@@ -15,6 +15,92 @@ ascii() {
   echo -e "${bgrwhite}${txtblack}${txtbold}$1${txtreset}"
 }
 
+copy_with_progress() {
+  local src="$1"
+  local dest="$2"
+
+  if [ ! -e "$src" ]; then
+    echo "Error: '$src' doesn\`t exist!"
+    return 1
+  fi
+
+  if [ -d "$src" ]; then
+    echo "Copying directory: $src -> $dest"
+
+    mkdir -p "$dest"
+
+    local total_files=$(find "$src" -type f | wc -l)
+    local copied_files=0
+
+    while IFS= read -r -d '' file; do
+      if [ -f "$file" ]; then
+        local relative_path="${file#$src/}"
+        local dest_file="$dest/$relative_path"
+
+        mkdir -p "$(dirname "$dest_file")"
+
+        cp "$file" "$dest_file"
+
+        copied_files=$((copied_files + 1))
+        local percent=$((copied_files * 100 / total_files))
+
+        local bar=""
+        local filled=$((percent / 2))
+        local empty=$((50 - filled))
+
+        for ((i = 0; i < filled; i++)); do bar+="█"; done
+        for ((i = 0; i < empty; i++)); do bar+="░"; done
+
+        printf "\r[%s] %3d%% File: %s" "$bar" "$percent" "$relative_path"
+      fi
+    done < <(find "$src" -type f -print0)
+
+    echo -e "\nDone! Copyed files: $copied_files"
+
+  elif [ -f "$src" ]; then
+    echo "Copying file: $src -> $dest"
+
+    local total_size=$(stat -c %s "$src" 2>/dev/null || stat -f %z "$src")
+    local copied=0
+    local block_size=4096
+
+    echo "Size: $((total_size / 1024)) KB"
+
+    mkdir -p "$(dirname "$dest")"
+
+    >"$dest"
+
+    while [ $copied -lt $total_size ]; do
+      dd if="$src" of="$dest" bs=$block_size count=1 skip=$((copied / block_size)) seek=$((copied / block_size)) conv=notrunc 2>/dev/null
+
+      copied=$((copied + block_size))
+      if [ $copied -gt $total_size ]; then
+        copied=$total_size
+      fi
+
+      local percent=$((copied * 100 / total_size))
+
+      local bar=""
+      local filled=$((percent / 2))
+      local empty=$((50 - filled))
+
+      for ((i = 0; i < filled; i++)); do bar+="█"; done
+      for ((i = 0; i < empty; i++)); do bar+="░"; done
+
+      printf "\r[%s] %3d%%" "$bar" "$percent"
+      sleep 0.01
+    done
+
+    echo -e "\nDone!"
+
+  else
+    echo "Error: '$src'"
+    return 1
+  fi
+}
+
+#starting script
+
 ascii "___  ________   ________  _________  ________  ___       ___           ________  ___  ___       "
 ascii "|\  \|\   ___  \|\   ____\|\___   ___\\   __  \|\  \     |\  \         |\   ____\|\  \|\  \      "
 ascii "\ \  \ \  \\ \  \ \  \___|\|___ \  \_\ \  \|\  \ \  \    \ \  \        \ \  \___|\ \  \\\  \       "
@@ -39,14 +125,14 @@ echo
 print_message "backup your current dotfiles? [y/n]"
 
 while true; do
-  read -r -p ">" answer
+  read -r -p "> " answer
 
   answer=$(echo "$answer" | tr '[:upper:]' '[:lower:]')
 
   case $answer in
   "y" | "yes")
     echo -e "backuping your previous dotfiles..."
-    cp $HOME/.config/ $HOME/.backup_dotfiles/ -r
+    copy_with_progress "$HOME/.config/" "$HOME/.backup_dotfiles/"
     break
     ;;
   "n" | "no")
@@ -59,24 +145,31 @@ while true; do
   esac
 done
 
+sleep 5
+
 #installing dotfiles
 print_message "installing dotfiles..."
-cp .config/alacritty $HOME/.config/ -r
-cp .config/dunst $HOME/.config/ -r
-cp .config/fastfetch $HOME/.config/ -r
-cp .config/gtk-3.0 $HOME/.config/ -r
-cp .config/gtk-4.0 $HOME/.config/ -r
-cp .config/hypr $HOME/.config/ -r
-cp .config/Kvantum $HOME/.config/ -r
-cp .config/nwg-look $HOME/.config/ -r
-cp .config/qt5ct $HOME/.config/ -r
-cp .config/qt6ct $HOME/.config/ -r
-cp .config/waybar $HOME/.config/ -r
-cp .config/wlogout $HOME/.config/ -r
-cp .config/wofi $HOME/.config/ -r
-cp .config/xsettingsd $HOME/.config -r
-cp .icons $HOME/ -r
-cp .vimrc $HOME/
+
+sleep 5
+
+copy_with_progress ".config/alacritty" "$HOME/.config/"
+copy_with_progress ".config/dunst" "$HOME/.config/"
+copy_with_progress ".config/fastfetch" "$HOME/.config/"
+copy_with_progress ".config/gtk-3.0" "$HOME/.config/"
+copy_with_progress ".config/gtk-4.0" "$HOME/.config/"
+copy_with_progress ".config/hypr" "$HOME/.config/"
+copy_with_progress ".config/Kvantum" "$HOME/.config/"
+copy_with_progress ".config/nwg-look" "$HOME/.config/"
+copy_with_progress ".config/qt5ct" "$HOME/.config/"
+copy_with_progress ".config/qt6ct" "$HOME/.config/"
+copy_with_progress ".config/waybar" "$HOME/.config/"
+copy_with_progress ".config/wlogout" "$HOME/.config/"
+copy_with_progress ".config/wofi" "$HOME/.config/"
+copy_with_progress ".config/xsettingsd" "$HOME/.config"
+copy_with_progress ".icons" "$HOME/"
+copy_with_progress ".vimrc" "$HOME/"
+
+sleep 5
 
 # installing packages
 print_message "installing packages..."
@@ -115,6 +208,8 @@ sudo pacman -S hyprland \
   ttf-arimo-nerd \
   noto-fonts
 
+sleep 5
+
 # installing AUR helper
 print_message "installing yay..."
 
@@ -123,12 +218,16 @@ git clone https://aur.archlinux.org/yay.git
 cd yay/
 makepkg -si
 
+sleep 5
+
 # installing AUR packages
 print_message "installing AUR packages..."
 
 yay -S pacseek \
   wlogout \
   waterfox-bin
+
+sleep 5
 
 # changing shell and installing oh-my-fish
 #print_message "configuring shell..."
