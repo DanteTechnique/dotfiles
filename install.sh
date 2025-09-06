@@ -132,7 +132,7 @@ while true; do
   case $answer in
   "y" | "yes")
     echo -e "backuping your previous dotfiles..."
-    copy_with_progress "$HOME/.config/" "$HOME/.backup_dotfiles/"
+    copy_with_progress "$HOME/.config/" "$HOME/.backup-dotfiles/"
     break
     ;;
   "n" | "no")
@@ -230,10 +230,12 @@ yay -S pacseek \
 sleep 5
 
 # changing shell and installing oh-my-fish
-#print_message "configuring shell..."
+print_message "configuring shell..."
+chsh -s /usr/bin/fish $(whoami)
 
-#chsh -s /usr/bin/fish $(whoami)
-#curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
-#omf install boxfish
+cd /tmp
+git clone https://github.com/oh-my-fish/oh-my-fish
+cd oh-my-fish
+bin/install --offline
 
 read -p "Done..."
