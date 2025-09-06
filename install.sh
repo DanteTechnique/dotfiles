@@ -239,14 +239,13 @@ git clone https://github.com/oh-my-fish/oh-my-fish
 cd oh-my-fish
 bin/install --offline
 
-print_message "Done..."
-
+#rebooting
 while true; do
   read -r -p "to work properly reboot your pc, do it now? [y/n] " answer2
 
   answer2=$(echo "$answer2" | tr '[:upper:]' '[:lower:]')
 
-  case $reboot in
+  case $answer2 in
   "y" | "yes")
     echo -e "rebooting..."
     sudo systemctl reboot
@@ -262,4 +261,4 @@ while true; do
   esac
 done
 
-read -p "installation done..."
+read -p "\e[$(tput setaf 2)installation done..."
