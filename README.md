@@ -3,7 +3,7 @@
 my personal hyrpland + waybar dotfiles.
 
 to-do:
-- [ ] make install script
+- [x] make install script
 - [ ] cool dunst config
 - [ ] rework clipboard
 
