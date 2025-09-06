@@ -182,6 +182,7 @@ sudo pacman -S hyprland \
   hypridle \
   hyprsunset \
   waybar \
+  pacman-contrib \
   wl-clipboard \
   nemo \
   wofi \
