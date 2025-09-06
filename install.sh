@@ -20,24 +20,27 @@ copy_with_progress() {
   local dest="$2"
 
   if [ ! -e "$src" ]; then
-    echo "Error: '$src' doesn\`t exist!"
+    echo "Error: '$src' doesn't exist!"
     return 1
   fi
 
   if [ -d "$src" ]; then
-    echo "Copying directory: $src -> $dest"
+    local dir_name=$(basename "$src")
+    local final_dest="$dest/$dir_name"
+
+    echo "Copying directory: $src -> $final_dest"
 
     mkdir -p "$dest"
 
     local total_files=$(find "$src" -type f | wc -l)
     local copied_files=0
 
+    find "$src" -type d -exec mkdir -p "$final_dest/{}" \; 2>/dev/null
+
     while IFS= read -r -d '' file; do
       if [ -f "$file" ]; then
         local relative_path="${file#$src/}"
-        local dest_file="$dest/$relative_path"
-
-        mkdir -p "$(dirname "$dest_file")"
+        local dest_file="$final_dest/$relative_path"
 
         cp "$file" "$dest_file"
 
@@ -55,47 +58,10 @@ copy_with_progress() {
       fi
     done < <(find "$src" -type f -print0)
 
-    echo -e "\nDone! Copyed files: $copied_files"
+    echo -e "\nDone! Copied files: $copied_files"
 
   elif [ -f "$src" ]; then
     echo "Copying file: $src -> $dest"
-
-    local total_size=$(stat -c %s "$src" 2>/dev/null || stat -f %z "$src")
-    local copied=0
-    local block_size=4096
-
-    echo "Size: $((total_size / 1024)) KB"
-
-    mkdir -p "$(dirname "$dest")"
-
-    >"$dest"
-
-    while [ $copied -lt $total_size ]; do
-      dd if="$src" of="$dest" bs=$block_size count=1 skip=$((copied / block_size)) seek=$((copied / block_size)) conv=notrunc 2>/dev/null
-
-      copied=$((copied + block_size))
-      if [ $copied -gt $total_size ]; then
-        copied=$total_size
-      fi
-
-      local percent=$((copied * 100 / total_size))
-
-      local bar=""
-      local filled=$((percent / 2))
-      local empty=$((50 - filled))
-
-      for ((i = 0; i < filled; i++)); do bar+="█"; done
-      for ((i = 0; i < empty; i++)); do bar+="░"; done
-
-      printf "\r[%s] %3d%%" "$bar" "$percent"
-      sleep 0.01
-    done
-
-    echo -e "\nDone!"
-
-  else
-    echo "Error: '$src'"
-    return 1
   fi
 }
 
