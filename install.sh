@@ -227,4 +227,4 @@ while true; do
   esac
 done
 
-read -p "\e[$(tput setaf 2)installation done..."
+read -p "$(tput setaf 2)installation done..."
