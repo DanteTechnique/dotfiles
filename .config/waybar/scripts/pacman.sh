@@ -12,6 +12,11 @@ handle_error() {
   echo -e "${txtred}Error: $1${txtwhite}" >&2
 }
 
+read_colored() {
+  txtgreen="$(tput setaf 2)"
+  read -r -p "${txtgreen}$1"
+}
+
 print_message " ▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄ ▄▄   ▄▄ ▄▄▄▄▄▄▄ ▄▄    ▄ "
 print_message "█       █       █       █  █▄█  █       █  █  █ █"
 print_message "█    ▄  █   ▄   █       █       █   ▄   █   █▄█ █"
@@ -39,5 +44,5 @@ print_message "█   █   █       █  ▄   █ █   █ █   █   █  �
 print_message "█▄▄▄█   █▄▄▄▄▄▄▄█▄█ █▄▄█ █▄▄▄█ █▄▄▄█   █▄█ █▄▄█▄▄▄█ █▄█"
 flatpak update || handle_error "Can't update Flatpak packages"
 
-print_message "Done..."
-sleep 5
+echo
+read_colored "Done..."
