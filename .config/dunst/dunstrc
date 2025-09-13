@@ -108,7 +108,7 @@
 
     # Defines width in pixels of frame around the notification window.
     # Set to 0 to disable.
-    frame_width = 3
+    frame_width = 2
 
     # Defines color of the frame around the notification window.
     frame_color = "#aaaaaa"
@@ -348,7 +348,7 @@
     default_icon = dialog-information
 
 [urgency_normal]
-    background = "#285577"
+    background = "#333333"
     foreground = "#ffffff"
     timeout = 10
     override_pause_level = 30
