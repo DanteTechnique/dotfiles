@@ -65,7 +65,9 @@ copy_with_progress() {
   fi
 }
 
-#starting script
+###################
+# starting script #
+###################
 
 ascii "___  ________   ________  _________  ________  ___       ___           ________  ___  ___       "
 ascii "|\  \|\   ___  \|\   ____\|\___   ___\\   __  \|\  \     |\  \         |\   ____\|\  \|\  \      "
@@ -76,18 +78,11 @@ ascii "   \ \__\ \__\\ \__\____\_\  \   \ \__\ \ \__\ \__\ \_______\ \_______\\_
 ascii "    \|__|\|__| \|__|\_________\   \|__|  \|__|\|__|\|_______|\|_______\|__|\_________\|__|\|__| "
 ascii "                   \|_________|                                           \|_________|          "
 
-#ascii "_________ _        _______ _________ _______  _        _           _______          "
-#ascii "\__   __/( (    /|(  ____ \\__   __/(  ___  )( \      ( \         (  ____ \|\     /|"
-#ascii "   ) (   |  \  ( || (    \/   ) (   | (   ) || (      | (         | (    \/| )   ( |"
-#ascii "   | |   |   \ | || (_____    | |   | (___) || |      | |         | (_____ | (___) |"
-#ascii "   | |   | (\ \) |(_____  )   | |   |  ___  || |      | |         (_____  )|  ___  |"
-#ascii "   | |   | | \   |      ) |   | |   | (   ) || |      | |               ) || (   ) |"
-#ascii "___) (___| )  \  |/\____) |   | |   | )   ( || (____/\| (____/\ _ /\____) || )   ( |"
-#ascii "\_______/|/    )_)\_______)   )_(   |/     \|(_______/(_______/(_)\_______)|/     \|"
-
 echo
 
-#backuping previous configuration
+####################################
+# backuping previous configuration #
+####################################
 print_message "backup your current dotfiles? [y/n]"
 
 while true; do
@@ -113,7 +108,9 @@ done
 
 sleep 5
 
-#installing dotfiles
+#######################
+# installing dotfiles #
+#######################
 print_message "installing dotfiles..."
 
 sleep 5
@@ -137,7 +134,9 @@ copy_with_progress ".vimrc" "$HOME/"
 
 sleep 5
 
-# installing packages
+#######################
+# installing packages #
+#######################
 print_message "installing packages..."
 
 sudo pacman -Syu
@@ -177,7 +176,9 @@ sudo pacman -S hyprland \
 
 sleep 5
 
-# installing AUR helper
+########################
+# installing AUR helper #
+########################
 print_message "installing yay..."
 
 cd /tmp
@@ -186,8 +187,9 @@ cd yay/
 makepkg -si
 
 sleep 5
-
-# installing AUR packages
+###########################
+# installing AUR packages #
+###########################
 print_message "installing AUR packages..."
 
 yay -S pacseek \
@@ -196,7 +198,9 @@ yay -S pacseek \
 
 sleep 5
 
-# changing shell and installing oh-my-fish
+############################################
+# changing shell and installing oh-my-fish #
+############################################
 print_message "configuring shell..."
 chsh -s /usr/bin/fish $(whoami)
 
@@ -205,7 +209,9 @@ git clone https://github.com/oh-my-fish/oh-my-fish
 cd oh-my-fish
 bin/install --offline
 
-#rebooting
+#############
+# rebooting #
+#############
 while true; do
   read -r -p "to work properly reboot your pc, do it now? [y/n] " answer2
 
