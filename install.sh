@@ -198,6 +198,18 @@ yay -S pacseek \
 
 sleep 5
 
+##########################
+# installing tmux config #
+##########################
+print_message "installing tmux configuration..."
+
+cd
+git clone --single-branch https://github.com/gpakosz/.tmux.git
+ln -s -f .tmux/.tmux.conf
+cp .tmux/.tmux.conf.local .
+
+sleep 5
+
 ############################################
 # changing shell and installing oh-my-fish #
 ############################################
