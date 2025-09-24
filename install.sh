@@ -12,9 +12,9 @@ print_message() {
   echo -e "${txtgreen}$1${txtreset}"
 }
 
-#error_message() {
-#  echo -e "${bgrwhite}${txtred}${txtbold}$1${txtreset}"
-#}
+error_message() {
+  echo -e "${bgrwhite}${txtred}${txtbold}$1${txtreset}"
+}
 
 #check_root() {
 #  if [[ "$(whoami)" = "root" ]]; then
