@@ -1,17 +1,28 @@
 #!/usr/bin/env bash
 
+txtgreen="\e[$(tput setaf 2)"
+txtblack="\e[$(tput setaf 0)"
+txtred="\e[$(tput setaf 1)"
+txtbold="\e[$(tput bold)"
+txtreset="\e[$(tput sgr0)"
+bgrwhite="\e[$(tput setab 7)"
+
 print_message() {
-  txtgreen="\e[$(tput setaf 2)"
-  txtreset="\e[$(tput sgr0)"
   echo
   echo -e "${txtgreen}$1${txtreset}"
 }
 
+#error_message() {
+#  echo -e "${bgrwhite}${txtred}${txtbold}$1${txtreset}"
+#}
+
+#check_root() {
+#  if [[ "$(whoami)" = "root" ]]; then
+#    ""
+#  fi
+#}
+
 ascii() {
-  txtblack="\e[$(tput setaf 0)"
-  txtbold="\e[$(tput bold)"
-  bgrwhite="\e[$(tput setab 7)"
-  txtreset="\e[$(tput sgr0)"
   echo -e "${bgrwhite}${txtblack}${txtbold}$1${txtreset}"
 }
 
