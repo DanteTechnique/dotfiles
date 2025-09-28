@@ -16,11 +16,12 @@ error_message() {
   echo -e "${bgrwhite}${txtred}${txtbold}$1${txtreset}"
 }
 
-#check_root() {
-#  if [[ "$(whoami)" = "root" ]]; then
-#    ""
-#  fi
-#}
+check_root() {
+  if [[ "$(whoami)" = "root" ]]; then
+    error_message "THIS SCRIPT IS WORKING UNDER ROOT"
+    exit 1
+  fi
+}
 
 ascii() {
   echo -e "${bgrwhite}${txtblack}${txtbold}$1${txtreset}"
@@ -50,7 +51,7 @@ copy_with_progress() {
 
     while IFS= read -r -d '' file; do
       if [ -f "$file" ]; then
-        local relative_path="${file#$src/}"
+        local relative_path="${file#"$src"/}"
         local dest_file="$final_dest/$relative_path"
 
         cp "$file" "$dest_file"
@@ -90,7 +91,7 @@ ascii "    \|__|\|__| \|__|\_________\   \|__|  \|__|\|__|\|_______|\|_______\|_
 ascii "                   \|_________|                                           \|_________|          "
 
 echo
-
+check_root
 ####################################
 # backuping previous configuration #
 ####################################
@@ -192,9 +193,9 @@ sleep 5
 ########################
 print_message "installing yay..."
 
-cd /tmp
+cd /tmp || return
 git clone https://aur.archlinux.org/yay.git
-cd yay/
+cd yay/ || return
 makepkg -si
 
 sleep 5
@@ -214,7 +215,7 @@ sleep 5
 ##########################
 print_message "installing tmux configuration..."
 
-cd
+cd || return
 git clone --single-branch https://github.com/gpakosz/.tmux.git
 ln -s -f .tmux/.tmux.conf
 cp .tmux/.tmux.conf.local .
@@ -225,11 +226,11 @@ sleep 5
 # changing shell and installing oh-my-fish #
 ############################################
 print_message "configuring shell..."
-chsh -s /usr/bin/fish $(whoami)
+chsh -s /usr/bin/fish "$(whoami)"
 
-cd /tmp
+cd /tmp || return
 git clone https://github.com/oh-my-fish/oh-my-fish
-cd oh-my-fish
+cd oh-my-fish || return
 bin/install --offline
 
 #############
@@ -256,4 +257,4 @@ while true; do
   esac
 done
 
-read -p "$(tput setaf 2)installation done..."
+read -rp "${bgrwhite}${txtgreen}installation done..."
